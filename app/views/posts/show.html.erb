@@ -1,0 +1,21 @@
+<article>
+<h1><%= @post.title %></h1>
+
+<p id="author">
+  <b>By:</b>
+  <%= @post.author ? @post.author.email : "Unknown" %>
+</p>
+
+<div id="post_body">
+  <%= @post.body %>
+</div>
+<hr>
+<% if policy(@post).update? %>
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+</article>
+<% if @post.comments.any? %>
+  <%= render @comments %>
+<% end %>
+<%= render "comments/form" %>
+<p class="back_link"><%= link_to 'Back to the blog', posts_path %></p>

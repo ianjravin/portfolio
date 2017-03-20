@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Ian Jravin Portfolio" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "Ian Jravin", posts_path %></a></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><%= link_to "Browse Posts", posts_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Portfolio", projects_path %></li>
+          <li class="divider"></li>
+          <% if current_user.present? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <% flash.each do |key, value| %>
+      <div class="row">
+        <div class="large-8 columns">
+          <div data-alert class="alert-box round <%= flash_class(key) %>">
+            <%= value %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="large-8 columns">
+        <%= yield %>
+      </div>
+      <div class="large-4 columns">
+        <h2 class="subheader">About</h2>
+        <p> Web developer in the making, plant operator by proffession, writer, poet and blogger by passion and rally driver at heart <a href="http://ianjravin.wordpress.com">my blog</a>. Am hands on when it comes to anything automotive but now my fingers are gentle on the keyboard and eyes kept open by coffee! </p>
+              <p>Currently a student at <a href="http://moringaschool.com">Moringaschool,</a> previously went to Kenya Institute of Highways and Building technology and Abdul Sidi Rally Academy.</p>
+              <p>Born and raised in Nanyuki in a family of 3, only son in our family. Dad works in the military and living in the barracks made me the man i am today.</p>
+          </div>
+    </div>
+  </body>
+</html>
